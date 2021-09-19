@@ -34,8 +34,6 @@ module.exports = {
             }
         }).then(res => res.json())
             .then(invite => {
-                console.log(invite)
-                console.log(invite.code)
                 if (!invite.code) {
                     var erreurCode = new Discord.MessageEmbed()
                         .setColor("#2F3136")
