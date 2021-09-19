@@ -18,7 +18,7 @@ module.exports = {
             return message.reply({ embeds : [erreur] })
         }
 
-        fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
+        fetch(`https://discord.com/api/v8/channels/${channel}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,
