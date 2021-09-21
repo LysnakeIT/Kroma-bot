@@ -16,7 +16,7 @@ module.exports = {
         if (!message.guild.me.permissions.has("KICK_MEMBERS")) return message.channel.send("**Je n'ai pas la permission de mute !**");
         mute.roles.remove(process.env.roleMute)
         mute.roles.add(process.env.roleMembre).then(member => {
-            message.channel.send(`**<@${mute.user.username}> a été unmute par ${message.author.username}**`)
+            message.channel.send(`**<@${mute.user.id}> a été unmute par ${message.author.username}**`)
         });
     }
 }
