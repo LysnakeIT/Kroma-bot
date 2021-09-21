@@ -111,7 +111,7 @@ client.on("guildMemberAdd", async member => {
   canvas.context.font = '42px Gotham Black'
   canvas.context.textAlign = 'center'
   canvas.context.fillStyle = "#ffffff"
-  canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
+  canvas.context.fillText(user.user.tag.toUpperCase(), 512, 410)
   canvas.context.fillStyle = "#ffffff"
   canvas.context.font = '32px Gotham Black'
   canvas.context.fillText("BIENVENUE SUR LE SERVEUR DE LA KROMA", 512, 455)
