@@ -34,12 +34,6 @@ module.exports = {
                 emoji: "865677012944289802"
               },
               {
-                label: 'Clean Install',
-                description: 'Explication de pourquoi il faut formater',
-                value: 'cleanInstall',
-                emoji: "865696300402212935"
-              },
-              {
                 label: 'Config',
                 description: 'Affiche le formulaire pour les configurations',
                 value: 'config',
