@@ -4,11 +4,11 @@ module.exports = {
   name: 'delwarns',
   run: async (client, message, args) => {
     if (message.channel.type === "dm") return;
-    if (!message.member.permissions.has("MANAGE_GUILD")) return message.reply("**:x: Vous n'avez pas la permission `Gérer le serveur` dans ce serveur**").catch(console.error);
+    if (!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return message.reply("**:x: Vous n'avez pas la permission `Gérer le serveur` dans ce serveur**").catch(console.error);
     const mentioned = message.mentions.users.first();
     const args1 = message.content.split(' ').slice(1);
     const arg2 = Number(args[1]);
-    if (message.member.permissions.has('MANAGE_GUILD')) {
+    if (message.member.hasPermission('MANAGE_GUILD')) {
       if (message.mentions.users.size != 0) {
         if (args1[0] === "<@!" + mentioned.id + ">" || args1[0] === "<@" + mentioned.id + ">") {
           if (!isNaN(arg2)) {

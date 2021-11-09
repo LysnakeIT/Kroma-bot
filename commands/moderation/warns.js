@@ -6,13 +6,13 @@ module.exports = {
   run: async (client, message, args) => {
     if (message.channel.type === "dm") return;
     var mentionned = message.mentions.users.first();
-    if (!message.member.permissions.has("MANAGE_GUILD")) return message.channel.send("**:x: | Vous n'avez pas la permission**").catch(console.error);
+    if (!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return message.channel.send("**:x: | Vous n'avez pas la permission**").catch(console.error);
     if (message.mentions.users.size === 0) {
       return message.channel.send("**:x: \ Vous devez mentionner un utilisateur**");
     } else {
       const args1 = message.content.split(' ').slice(1);
       const mentioned = message.mentions.users.first();
-      if (message.member.permissions.has('MANAGE_GUILD')) {
+      if (message.member.hasPermission('MANAGE_GUILD')) {
         if (message.mentions.users.size != 0) {
           if (args1[0] === "<@!" + mentioned.id + ">" || args1[0] === "<@" + mentioned.id + ">") {
             if (args1.slice(1).length != 0) {

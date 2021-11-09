@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 
-module.exports = async (client, invite) => {
+module.exports = async (Client, invite) => {
     const fetchGuildAuditLogs = await invite.guild.fetchAuditLogs({
         limit: 1,
         type: 'INVITE_CREATE'
@@ -15,7 +16,7 @@ module.exports = async (client, invite) => {
         .setColor('#00FF04')
         .setFooter("Kroma'Discord")
         .setTimestamp()
-    let channel = client.channels.cache.get(process.env.channelLogs);
+    let channel = Client.channels.cache.get(process.env.channelLogs);
     if (!channel) return;
-    channel.send({ embeds : [banembed] });
+    channel.send(banembed);
 }

@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 const superagent = require('superagent');
-const snekfetch = require('snekfetch');
+const snekfetch = require('superagent');
 module.exports = {
     name: "wiki",
     category: "info",
@@ -23,13 +24,13 @@ module.exports = {
             var erreur = new Discord.MessageEmbed()
                 .setColor("#2F3136")
                 .setTitle("<:warning:869206692091531305> Vous devez mentionner une information à rechercher !")
-            return message.channel.send({ embeds : [erreur] });
+            return message.channel.send(erreur);
         }
         if (body.query.pages[0].missing) {
             var erreurInfo = new Discord.MessageEmbed()
                 .setColor("#2F3136")
                 .setTitle("<a:non:802645550435532810> Pas de résultats, réessayer avec plus d'informations.")
-            return message.channel.send({ embeds : [erreurInfo] });
+            return message.channel.send(erreurInfo);
         }
         const embed = new Discord.MessageEmbed()
             .setColor("00FF04")
@@ -38,6 +39,7 @@ module.exports = {
             .setTimestamp()
             .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Wikipedia-logo-v2-fr.svg/892px-Wikipedia-logo-v2-fr.svg.png')
             .setDescription(body.query.pages[0].extract.substr(0, 2000).replace(/[\n]/g, '\n\n'));
-        return message.channel.send({ embeds : [embed] }).catch(console.error);
+        console.log(`${message.author.tag} a utilisé la commande /wiki`)
+        return message.channel.send(embed).catch(console.error);
     }
 }

@@ -2,16 +2,16 @@ const Discord = require("discord.js");
 module.exports = {
     name: "giveaway",
     category: "info",
-    description: "Return the winner",
+    description: "Tire au sort un gagnant",
     run: async (Client, message, args) => {
         if (!message.guild) return;
         async function giveaway() {
             var time = '';
             var time2 = '';
             var time3 = '';
-            if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('**Vous n\'avez pas la permission d\'éxécuter cette commande !**');
+            if (!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('**Vous n\'avez pas la permission d\'éxécuter cette commande !**');
             const stated_duration_hours = message.content.split(' ')[1];
-            const stated_duration_hours2 = stated_duration_hours
+            const stated_duration_hours2 = stated_duration_hours.toLowerCase();
             if (stated_duration_hours2.includes('s')) {
                 var time = 's';
             }
@@ -64,7 +64,7 @@ module.exports = {
                         .setDescription(`Réagissez avec 🎉 pour participer\n**Temps restant :** **${stated_duration_hours3}** ${time2}${time3}\n**Hosted by :** ${message.author}`)
                         .setTimestamp(Date.now() + (actual_duration_hours))
                         .setFooter('Terminé à')
-                    let msg = await message.channel.send({ content: `@everyone :tada: **GIVEAWAY** :tada:`, embeds : [embed]})
+                    let msg = await message.channel.send('@everyone :tada: **GIVEAWAY** :tada:', embed)
                     await msg.react('🎉')
                     setTimeout(() => {
                         msg.reactions.cache.get('🎉').users.remove(Client.user.id)
@@ -78,7 +78,7 @@ module.exports = {
                                     .setDescription(`**Winner :** Aucun.\n\n**Hosted by :** ${message.author}`)
                                     .setTimestamp()
                                     .setFooter('Terminé à')
-                                msg.edit({ content: `:tada: **GIVEAWAY TERMINE** :tada:`, embeds : [winner_embed]});
+                                msg.edit(':tada: **GIVEAWAY TERMINE** :tada:', winner_embed);
                             }
                             if (!msg.reactions.cache.get('🎉').users.cache.size < 1) {
                                 const winner_embed = new Discord.MessageEmbed()
@@ -88,7 +88,7 @@ module.exports = {
                                     .setDescription(`**Winner :**${winner}\n\n**Hosted by :** ${message.author}`)
                                     .setTimestamp()
                                     .setFooter('Terminé à')
-                                msg.edit({ content: `:tada: **GIVEAWAY TERMINE** :tada:`, embeds : [winner_embed]});
+                                msg.edit(':tada: **GIVEAWAY TERMINE** :tada:', winner_embed);
                                 message.channel.send(`@everyone :tada: **Le gagnant est :** ${winner} :tada:`)
                             }
                         }, 1000);

@@ -1,30 +1,11 @@
-const { Client, Collection } = require('discord.js');
-const Discord = require('discord.js');
-const client = new Client({
-  intents: [
-    'DIRECT_MESSAGES',
-    'DIRECT_MESSAGE_REACTIONS',
-    'DIRECT_MESSAGE_TYPING',
-    'GUILDS',
-    'GUILD_BANS',
-    'GUILD_EMOJIS_AND_STICKERS',
-    'GUILD_INTEGRATIONS',
-    'GUILD_INVITES',
-    'GUILD_MEMBERS',
-    'GUILD_MESSAGES',
-    'GUILD_MESSAGE_REACTIONS',
-    'GUILD_MESSAGE_TYPING',
-    'GUILD_PRESENCES',
-    'GUILD_VOICE_STATES',
-    'GUILD_WEBHOOKS',
-  ],
-});
+const Discord = require("discord.js");
+const Client = new Discord.Client()
 const fs = require('fs');
 const Canvas = require('canvas');
-client.commands = new Collection();
+Client.commands = new Discord.Collection();
 const { Captcha } = require('discord.js-captcha');
 
-const captch = new Captcha(client, {
+const captch = new Captcha(Client, {
   guildID: process.env.guildID,
   roleID: process.env.roleID,
   channelID: process.env.channelID,
@@ -33,10 +14,12 @@ const captch = new Captcha(client, {
 
 const { Player } = require('discord-player');
 
-client.player = new Player(client);
-client.config = require('./config/bot');
-client.emotes = client.config.emojis;
-client.login(client.config.discord.token);
+require("discord-buttons")(Client);
+
+Client.player = new Player(Client);
+Client.config = require('./config/bot');
+Client.emotes = Client.config.emojis;
+Client.login(Client.config.discord.token);
 
 
 fs.readdirSync('./commands').forEach(dirs => {
@@ -44,7 +27,7 @@ fs.readdirSync('./commands').forEach(dirs => {
   for (const file of commands) {
     const command = require(`./commands/${dirs}/${file}`);
     console.log(`Loading command ${file}`);
-    client.commands.set(command.name, command);
+    Client.commands.set(command.name, command);
   };
 });
 
@@ -52,7 +35,7 @@ const player = fs.readdirSync('./player').filter(file => file.endsWith('.js'));
 for (const file of player) {
   console.log(`Loading discord-player event ${file}`);
   const event = require(`./player/${file}`);
-  client.player.on(file.split(".")[0], event.bind(null, client));
+  Client.player.on(file.split(".")[0], event.bind(null, Client));
 };
 
 fs.readdir('./events/', (err, files) => {
@@ -60,7 +43,7 @@ fs.readdir('./events/', (err, files) => {
   files.forEach(f => {
     const event = require(`./events/${f}`);
     console.log(`Loading command ${f}`);
-    client.on(f.split('.')[0], event.bind(null, client));
+    Client.on(f.split('.')[0], event.bind(null, Client));
     delete require.cache[require.resolve(`./events/${f}`)];
   });
 });
@@ -71,7 +54,8 @@ fs.readdir('./events/', (err, files) => {
                                                                             ********************
                                                                                                   *************************/
 
-client.on("message", async (message, guild) => {
+
+Client.on("message", async (message, guild) => {
   const prefix = "!";
 
   if (message.author.bot) return;
@@ -85,12 +69,18 @@ client.on("message", async (message, guild) => {
 
   if (cmd.length === 0) return;
 
-  let command = client.commands.get(cmd);
+  let command = Client.commands.get(cmd);
 
   if (command)
-    command.run(client, message, args);
+    command.run(Client, message, args);
 
 });
+
+/********** 
+            *****************************
+                                           PARTIE AFFICHAGE HARDWARE/SOFTWARE (hs)
+                                                                                  ********************
+                                                                                                       *************************/
 
 var welcomeCanvas = {};
 welcomeCanvas.create = Canvas.createCanvas(1014, 500)
@@ -105,13 +95,13 @@ Canvas.loadImage(`./wallpaper.jpg`).then(async (img) => {
   welcomeCanvas.context.arc(512, 166, 128, 0, Math.PI * 2, true);
   welcomeCanvas.context.stroke()
 })
-client.on("guildMemberAdd", async member => {
+Client.on("guildMemberAdd", async member => {
   let canvas = welcomeCanvas
   let user = member;
   canvas.context.font = '42px Gotham Black'
   canvas.context.textAlign = 'center'
   canvas.context.fillStyle = "#ffffff"
-  canvas.context.fillText(user.user.tag.toUpperCase(), 512, 410)
+  canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410)
   canvas.context.fillStyle = "#ffffff"
   canvas.context.font = '32px Gotham Black'
   canvas.context.fillText("BIENVENUE SUR LE SERVEUR DE LA KROMA", 512, 455)
@@ -130,7 +120,7 @@ client.on("guildMemberAdd", async member => {
   setTimeout(() => {
     if (member.roles.cache.some(r => r.name === "😃 | Membres")) {
       const embedsend = member.guild.channels.cache.get(process.env.channelWelcome)
-      embedsend.send({ files: [attachment] })
+      embedsend.send(attachment)
     }
   }, 70000)
 })

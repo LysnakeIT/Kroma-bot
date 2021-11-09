@@ -12,7 +12,7 @@ module.exports = {
                 var erreur = new Discord.MessageEmbed()
                     .setColor("#2F3136")
                     .setTitle("<a:non:802645550435532810> Emplacement introuvable !")
-                message.channel.send({ embeds : [erreur] })
+                message.channel.send(erreur)
                 return;
             }
 
@@ -30,7 +30,7 @@ module.exports = {
                 .addField('**🤒 Ressenti ❯**', `${current.feelslike} Degrés`, true)
                 .addField('**💨 Vents ❯**', current.winddisplay, true)
                 .addField('**💦 Humidité ❯**', `${current.humidity}%`, true)
-            message.channel.send({ embeds : [embed] })
+            message.channel.send(embed)
         });
     }
 }

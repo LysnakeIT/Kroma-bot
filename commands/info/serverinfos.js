@@ -8,11 +8,11 @@ module.exports = {
             .setColor("#00FF04")
             .setTitle(`📈 Statistiques du serveur ${message.guild.name} !`)
             .setThumbnail(message.guild.iconURL())
-            .addField("👑 Fondateur :", `<@${( await message.guild.fetchOwner()).id}>`, true)
-            .addField("🌍 Région : ", `${message.guild.region}`, true)
-            .addField("🔉 Catégories et salons ✏️ :", `${message.guild.channels.cache.size}`, true)
-            .addField("👱‍♂️ Membres :", `${message.guild.memberCount}`, true)
-            .addField("⚙️ Roles :", `${message.guild.roles.cache.size}`, true)
-        message.channel.send({ embeds : [infos_embed] });
+            .addField("👑 Fondateur :", message.guild.owner, true)
+            .addField("🌍 Région : ", message.guild.region, true)
+            .addField("🔉 Catégories et salons ✏️ :", message.guild.channels.cache.size, true)
+            .addField("👱‍♂️ Membres :", message.guild.memberCount, true)
+            .addField("⚙️ Roles :", message.guild.roles.cache.size, true)
+        message.channel.send(infos_embed);
     }
 }

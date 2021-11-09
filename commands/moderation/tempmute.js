@@ -6,7 +6,7 @@ module.exports = {
     category: "info",
     description: "Mute temporairement un user",
     run: async (Client, message, args) => {
-        if (!message.member.permissions.has('KICK_MEMBERS')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
+        if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
         const member = message.mentions.members.first()
         if (!member) return message.channel.send('Veuillez mentionner le membre à mute.')
         if (!member.manageable) return message.channel.send('Le bot ne peut pas mute ce membre.')
@@ -24,7 +24,7 @@ module.exports = {
             .setDescription(`**Utilisateur mute :** ${user.tag}\n**Modérateur :** ${message.author.tag}\n**Temps : ${ms(ms(duration))}** \n**Raison :** ` + reason);
 
         // Envoi du message
-        channel.send({embeds : [mute_embed]});
+        channel.send(mute_embed);
         user.send(`Salut à toi <@${member.user.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${ms(ms(duration))}`)
         console.log(`${member.user.tag} est mute`)
         setTimeout(() => {

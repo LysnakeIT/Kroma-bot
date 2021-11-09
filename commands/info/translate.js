@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 const translate = require("@iamtraction/google-translate")
 module.exports = {
     name: "translate",
@@ -23,6 +24,6 @@ module.exports = {
             .setFooter(message.author.tag, message.author.displayAvatarURL())
             .setColor("00FF04");
 
-        message.channel.send({ embeds : [embed] })
+        message.channel.send(embed)
     }
 }

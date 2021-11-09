@@ -1,0 +1,31 @@
+{
+  "name": "kroma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@iamtraction/google-translate": "^1.1.2",
+    "canvas": "^2.8.0",
+    "cron": "^1.8.2",
+    "discord-buttons": "^4.0.0",
+    "discord-player": "^4.1.4",
+    "discord.js": "^12.5.3",
+    "discord.js-captcha": "^1.0.3",
+    "ffmpeg-static": "^4.4.0",
+    "fs": "^0.0.1-security",
+    "mathjs": "^9.4.4",
+    "moment": "^2.29.1",
+    "node-fetch": "^2.6.1",
+    "novelcovid": "^3.0.2",
+    "snekfetch": "^4.0.4",
+    "superagent": "^6.1.0",
+    "weather-js": "^2.0.0"
+  }
+}

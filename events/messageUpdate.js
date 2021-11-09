@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 
 module.exports = async (Client, oldMessage, newMessage) => {
     if (oldMessage.content === newMessage.content) {
@@ -14,5 +15,5 @@ module.exports = async (Client, oldMessage, newMessage) => {
         .setTimestamp()
     let channel = newMessage.guild.channels.cache.get(process.env.channelLogs);
     if (!channel) return;
-    channel.send({ embeds : [embed] });
+    channel.send(embed);
 }

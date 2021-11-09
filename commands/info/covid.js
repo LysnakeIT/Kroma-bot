@@ -20,13 +20,13 @@ module.exports = {
                 .setTitle(`Informations sur la Covid-19 en ${countrycovid[1]}`)
                 .setColor("00FF04")
                 .setThumbnail("https://cdn.pixabay.com/photo/2020/02/17/07/19/covid-19-4855688_640.png")
-                .addField('\n:thermometer_face: **Total Confirmé**', data.cases.toString(), true)
-                .addField(':skull: **Total décès**', data.deaths.toString(), true)
-                .addField(':white_check_mark: **Total guérison**', data.recovered.toString(), true)
-                .addField(':clock2: **Cas actifs**', data.active.toString(), true)
+                .addField('\n:thermometer_face: **Total Confirmé**', data.cases, true)
+                .addField(':skull: **Total décès**', data.deaths, true)
+                .addField(':white_check_mark: **Total guérison**', data.recovered, true)
+                .addField(':clock2: **Cas actifs**', data.active, true)
                 .setTimestamp()
 
-            message.channel.send({ embeds : [embed] });
+            message.channel.send(embed);
         }
     }
 }

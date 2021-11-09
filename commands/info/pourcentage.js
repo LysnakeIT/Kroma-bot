@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 module.exports = {
     name: "pourcentage",
     category: "info",
@@ -17,6 +18,6 @@ module.exports = {
             .addField("Réponse :", `\`\`\`css\n${percentage} %\`\`\``)
             .setThumbnail("https://cdn.discordapp.com/attachments/596689931749818398/802649104731078696/pourcentage-2-51962.png")
 
-        message.channel.send({ embeds : [embed] })
+        message.channel.send(embed)
     }
 }

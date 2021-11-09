@@ -8,7 +8,7 @@ module.exports = {
     },
 
     discord: {
-        token: 'process.env.token',
+        token: process.env.token,
         prefix: '!',
     },
 

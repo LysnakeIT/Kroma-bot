@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 
-module.exports = async (client, member) => {
-    const fetchGuildAuditLogs = await member.guild.fetchAuditLogs({
+module.exports = async (Client, guild, user) => {
+    const fetchGuildAuditLogs = await guild.fetchAuditLogs({
         limit: 1,
         type: 'MEMBER_BAN_ADD'
     });
@@ -10,13 +11,13 @@ module.exports = async (client, member) => {
     const { executor } = latestMemberBanAdd;
 
     const banembed = new Discord.MessageEmbed()
-        .setAuthor(member.user.tag, member.user.displayAvatarURL())
-        .setDescription(`:airplane: <@${member.user.id}> **banni du serveur par ${executor.tag}.**`)
+        .setAuthor(user.tag, user.displayAvatarURL())
+        .setDescription(`:airplane: <@${user.id}> **banni du serveur par ${executor.tag}.**`)
         .setColor('#00FF04')
-        .setThumbnail(member.user.displayAvatarURL())
+        .setThumbnail(user.displayAvatarURL())
         .setFooter("Kroma'Discord")
         .setTimestamp()
-    let channel = client.channels.cache.get(process.env.channelLogs);
+    let channel = guild.channels.cache.get(process.env.channelLogs);
     if (!channel) return;
-    channel.send({ embeds : [banembed] });
+    channel.send(banembed);
 }

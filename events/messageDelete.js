@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Client = new Discord.Client();
 
 module.exports = async (Client, message) => {
     let embed = new Discord.MessageEmbed()
@@ -10,5 +11,5 @@ module.exports = async (Client, message) => {
         .setTimestamp()
     let channel = message.guild.channels.cache.get(process.env.channelLogs);
     if (!channel) return;
-    channel.send({ embeds : [embed] });
+    channel.send(embed);
 }
