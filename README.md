@@ -30,7 +30,7 @@ Ce projet utilise comme technologies :
 | - |:-:|:-:|:-:|
 | **User info / server info / bot info**  	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	|
 | **Calculatrice Math**  	| :white_check_mark:	| :white_check_mark: 	| :white_check_mark:	|
-| **Calcul pourcentage**  	| :white_check_mark: 	| :x: | :white_check_mark:	|
+| **Calcul pourcentage**  	| :white_check_mark: 	| :x: | :x: |
 | **Stats COVID19** 	| :white_check_mark: | :white_check_mark: | :x:	|
 | **Quizz informatique**  	| :white_check_mark: 	|  :white_check_mark: 	| :white_check_mark:	|
 | **Traduction langage** 	| :white_check_mark:	| :white_check_mark: 	| :x:	|
