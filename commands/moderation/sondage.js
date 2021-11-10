@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
+
 module.exports = {
     name: "sondage",
     category: "info",
     description: "Envoie un sondage",
+
     run: async (Client, message, args) => {
         function emoji(id) {
             return client.emojis.get(id).toString();

@@ -4,10 +4,10 @@ const math = require('mathjs');
 
 module.exports = {
     name: "math",
-    category: "info",
     description: "Retourne le résultat d'une opération",
-    
-    run: async (Client, message, args) => {
+    permissions: [""],
+
+    run: async (client, interaction, args) => {
         let button = new Array([], [], [], [], []);
         let row = [];
         let text = ["Clear", "(", ")", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", ".", "0", "00", "="];
@@ -24,10 +24,10 @@ module.exports = {
         // Creation de l'embed avec la calculatrice
         const emb = new Discord.MessageEmbed()
             .setColor("#00FF04")
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL())
             .setDescription("```0```")
 
-        message.channel.send({
+        interaction.followUp({
             embeds: [emb],
             components: row
         }).then((msg) => {
@@ -37,16 +37,16 @@ module.exports = {
             let value = ""
 
             let emb1 = new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL())
                 .setColor("#00FF04")
 
             function createCollector(val, result = false) {
 
-                const filter = (button) => button.user.id === message.author.id && button.customId === 'cal' + val
+                const filter = (button) => button.user.id === interaction.user.id && button.customId === 'cal' + val
                 let collect = msg.createMessageComponentCollector({ filter, componentType: 'BUTTON', time: time });
 
                 collect.on("collect", async x => {
-                    if (x.user.id !== message.author.id) return;
+                    if (x.user.id !== interaction.user.id) return;
 
                     x.deferUpdate();
 
@@ -111,8 +111,8 @@ module.exports = {
                 let res = `${input} = ${math.evaluate(input)}`
                 return res
             } catch {
-                return "Mauvaise entrée"
+                return "Wrong Input"
             }
         }
     }
-}
+};

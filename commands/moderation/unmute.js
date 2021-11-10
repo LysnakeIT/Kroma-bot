@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
+
 module.exports = {
     name: "unmute",
     category: "info",
     description: "Unmute un user",
+
     run: async (Client, message, args) => {
         if (!message.member.permissions.has("KICK_MEMBERS")) return message.channel.send("**Vous n'avez pas la permission d'éxécuter cette commande !**");
 

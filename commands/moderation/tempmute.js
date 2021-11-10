@@ -5,6 +5,7 @@ module.exports = {
     name: "tempmute",
     category: "info",
     description: "Mute temporairement un user",
+    
     run: async (Client, message, args) => {
         if (!message.member.permissions.has('KICK_MEMBERS')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
         const member = message.mentions.members.first()

@@ -4,15 +4,14 @@ const { questions } = require('../../settings/bot');
 
 module.exports = {
     name: "quizz",
-    category: "info",
     description: "Quizz portant sur l'informatique",
+    permissions : [""],
 
-    run: async (Client, message, args) => {
+    run: async (client, interaction, args) => {
         const erreur = new Discord.MessageEmbed()
             .setColor("#2F3136")
             .setTitle("<a:non:802645550435532810> Mauvais salon !")
-        if (message.channel.name === (process.env.channelGames)) {
-            message.delete();
+        if (interaction.channel.name === (process.env.channelGames)) {
             let q = questions[Math.floor(Math.random() * questions.length)];
             let i = 0;
             let ret = (q.options.map((opt) => {
@@ -30,7 +29,6 @@ module.exports = {
                 .setThumbnail("https://img.static-rmg.be/a/view/q100/w900/h600/2447731/gettyimages-943481846-jpg.jpg")
                 .setFooter(`Répondez à ce message avec le bon numéro de question! Vous avez 15 secondes.`);
 
-            // Ajout des boutons d'options
             const row = new MessageActionRow()
             if (q.options.length == 4) {
                 row.addComponents(
@@ -84,14 +82,12 @@ module.exports = {
                         .setStyle('PRIMARY'),
                 );
             }
-            const m = await message.channel.send({ embeds: [Embed], ephemeral: true, components: [row] });
+            const m = await interaction.followUp({ embeds: [Embed], ephemeral: true, components: [row] });
             try {
-                const iFiltre = (u2) => u2.user.id === message.author.id
+                const iFiltre = (u2) => u2.user.id === interaction.user.id
                 let rep = true;
                 const collector = m.createMessageComponentCollector({ filter: iFiltre, time: 15000, max: 1, errors: ["time"], rep: true })
                 collector.on('collect', async i => {
-
-                    // En fonction de la réponse vérifie si c'est la bonne réponse et renvoie une image validant ou refusant notre réponse.
                     if (i.customId === '1') {
                         if (1 === q.correct) {
                             Embed.setTitle("").setDescription('').setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`).setThumbnail("").setFooter(``);
@@ -146,7 +142,7 @@ module.exports = {
             }
 
         } else {
-            return message.channel.send({ embeds: [erreur] })
+            return interaction.followUp({ embeds: [erreur] })
         }
-    }
-}
+    },
+};

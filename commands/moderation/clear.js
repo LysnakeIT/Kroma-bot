@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
+
 module.exports = {
     name: "clear",
     category: "info",
     description: "Clear un channel",
+    
     run: async (Client, message, args) => {
         message.delete();
         var embedMention = new Discord.MessageEmbed()

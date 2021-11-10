@@ -3,6 +3,7 @@ module.exports = {
     name: "slowmode",
     category: "moderation",
     description: "Change la durée du slowmode d'un salon",
+    
     run: async (Client, message, args) => {
         if (!message.member.permissions.has('KICK_MEMBERS')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
         if (!args[0]) return message.channel.send(`Vous n'avez pas spécifié de temps.`)

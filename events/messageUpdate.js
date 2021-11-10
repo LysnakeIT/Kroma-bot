@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const client = require("..");
 
 module.exports = async (Client, oldMessage, newMessage) => {
     if (oldMessage.content === newMessage.content) {

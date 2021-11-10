@@ -1,23 +1,21 @@
 const fetch = require("node-fetch")
 const Discord = require("discord.js");
-const { Client, Intents, Collection } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-client.config = require('../../settings/bot');
+var config = require('../../settings/config');
 
 module.exports = {
     name: "yt",
-    category: "info",
     description: "Permet de lire des vidéos dans un channel",
-    
-    run: async (client, message, args) => {
-        if (!message.guild || message.author.bot || !message.content.trim().startsWith(client.config.discord.prefix)) return;
+    permissions: [""],
 
-        const channel  = message.member.voice.channelId;
-        if (!message.member.voice.channelId) {
+    run: async (client, interaction, args) => {
+
+        let user = await interaction.member.fetch();
+        const channel = user.voice.channelId;
+        if (!user.voice.channel) {
             var erreur = new Discord.MessageEmbed()
                 .setColor("#2F3136")
                 .setTitle("<a:non:802645550435532810> Veuillez vous diriger vers un salon vocal !")
-            return message.reply({ embeds : [erreur] })
+            return interaction.followUp({ embeds: [erreur] })
         }
 
         // Création de l'activité en passant l'id du channel vocal et en requetant l'api discord
@@ -32,7 +30,7 @@ module.exports = {
                 validate: null
             }),
             headers: {
-                "Authorization": `Bot ${client.config.discord.token}`,
+                "Authorization": `Bot ${config.token}`,
                 "Content-Type": "application/json"
             }
         }).then(res => res.json())
@@ -41,14 +39,14 @@ module.exports = {
                     var erreurCode = new Discord.MessageEmbed()
                         .setColor("#2F3136")
                         .setTitle("<a:non:802645550435532810> Erreur impossible de lancer !")
-                    return message.reply({ embeds : [erreurCode] })
+                    return interaction.followUp({ embeds: [erreurCode] })
                 }
                 var embed = new Discord.MessageEmbed()
                     .setTitle('YOUTUBE WATCH')
                     .setColor("00FF04")
                     .setDescription(`[Cliquez ici pour lancer / rejoindre l'activité](https://discord.com/invite/${invite.code})`)
                     .setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Logo_of_YouTube_%282005-2011%29.svg/2560px-Logo_of_YouTube_%282005-2011%29.svg.png")
-                message.channel.send({ embeds : [embed] })
+                interaction.followUp({ embeds: [embed] })
             })
     }
-}
+};

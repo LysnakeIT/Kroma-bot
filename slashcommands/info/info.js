@@ -3,16 +3,25 @@ const moment = require("moment");
 
 module.exports = {
     name: "info",
-    category: "info",
     description: "Retourne les infos sur un user",
-
-    run: async (Client, message, args) => {
-        if (message.mentions.users.first()) {
-            user = message.mentions.users.first();
-        } else {
-            user = message.author;
+    permissions : [""],
+    options: [
+        {
+          name: "membre",
+          description: "Le membre dont on veux les informations",
+          type: "USER",
+          required: false
         }
-        const member = message.guild.members.cache.get(user.id);
+    ],
+    
+    run: async (client, interaction, args) => {
+        if (interaction.options.getUser("membre")) {
+            const mention = interaction.options.getUser("membre");
+            user = interaction.guild.members.cache.get(mention.id);
+        } else {
+            user = interaction.member;
+        }
+        const member = interaction.guild.members.cache.get(user.id);
         const embed = new Discord.MessageEmbed()
             .setColor('#00FF04')
             .setThumbnail((member.user.displayAvatarURL({dynamic: true})))
@@ -22,7 +31,7 @@ module.exports = {
             .addField('✅ Status :', `${member.presence.status}`, true)
             .addField('⚙️ Roles :', member.roles.cache.map(roles => `${roles.name}`).join(' - '), true)
             .addField('🎮 Joue a :', `${member.presence.activities && member.presence.activities.length ? member.presence.activities[0].name : 'Rien'}`, true)
-            .setFooter(`En réponse à : ${message.author.tag}`)
-        message.channel.send({ embeds : [embed] })
-    }
-}
+            .setFooter(`En réponse à : ${interaction.user.tag}`)
+            interaction.followUp({ embeds : [embed] })
+    },
+};
