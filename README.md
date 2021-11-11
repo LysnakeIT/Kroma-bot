@@ -41,7 +41,7 @@ Ce projet utilise comme technologies :
 | **Warns / delwarns / seewarns**	| :white_check_mark: 	| :x:	| :x:	|
 | **Slowmode**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
 | **Sondage**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
-| **Musique** 	| :white_check_mark: 	| :x: | :x:	|
+| **Musique** 	| :white_check_mark: 	| :white_check_mark: | :x: |
 | **Twitch stats**	| :white_check_mark:	| :white_check_mark: | Impossible |
 | **Canvas welcome**	| :white_check_mark:	| :x:	| Impossible |
 | **Captcha** 	| :white_check_mark:| :x: | Impossible |
