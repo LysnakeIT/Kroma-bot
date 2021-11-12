@@ -1,4 +1,4 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageAttachment } = require("discord.js");
 const client = new Client({
     messageCacheLifetime: 60,
     fetchAllMembers: false,
@@ -8,6 +8,19 @@ const client = new Client({
     shards: "auto",
     intents: 32767,
 });
+
+const { Captcha } = require("discord.js-captcha");
+const captch = new Captcha(Client, {
+  guildID: process.env.guildID,
+  roleID: process.env.roleID,
+  channelID: process.env.channelID,
+  sendToTextChannel: false,
+  kickOnFailure: true,
+  attempts: 2,
+  timeout: 30000,
+  showAttemptCount: true
+});
+
 const fs = require("fs");
 client.commands = new Collection();
 client.slashCommands = new Collection();
@@ -50,3 +63,44 @@ fs.readdirSync("./slashcommands").forEach(dirs => {
                                            PARTIE AFFICHAGE TWITCH PRIVEE
                                                                             ********************
                                                                                                   *************************/
+client.on("guildMemberAdd", async member => {
+  captch.present(member)
+  captch.on("success", data => {
+    console.log(data);
+    welcome(member)
+  });
+});
+
+
+async function welcome(member) {
+  const canvas = Canvas.createCanvas(1014, 500)
+  const context = canvas.getContext("2d")
+  context.font = "80px Gotham Black"
+  context.fillStyle = `#00ff19`;
+  const background = await Canvas.loadImage(`./wallpaper.jpg`)
+
+  context.drawImage(background, 0, 0, canvas.width, canvas.height)
+  context.fillText("BIENVENUE", 290, 360);
+  context.beginPath()
+  context.arc(512, 166, 128, 0, Math.PI * 2, true);
+  context.stroke()
+
+  context.font = '42px Gotham Black'
+  context.textAlign = 'center'
+  context.fillStyle = "#ffffff"
+  context.fillText(member.user.tag.toUpperCase(), 512, 410)
+  context.fillStyle = "#ffffff"
+  context.font = '32px Gotham Black'
+  context.fillText("BIENVENUE SUR LE SERVEUR DE LA KROMA", 512, 455)
+
+  context.beginPath();
+  context.arc(512, 166, 119, 0, Math.PI * 2, true);
+  context.closePath();
+  context.clip();
+
+  const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'png', size: 1024 }))
+  context.drawImage(avatar, 393, 47, 238, 238)
+  const attachment = new MessageAttachment(canvas.toBuffer(), './Welcome.jpg');
+  const embedsend = member.guild.channels.cache.get(process.env.channelWelcome)
+  embedsend.send({ files: [attachment] })
+}
