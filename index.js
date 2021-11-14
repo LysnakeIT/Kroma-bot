@@ -1,3 +1,4 @@
+const { Player } = require('discord-player');
 const { Client, Collection, MessageAttachment } = require("discord.js");
 const client = new Client({
     messageCacheLifetime: 60,
@@ -21,11 +22,14 @@ const captch = new Captcha(Client, {
   showAttemptCount: true
 });
 
+const Canvas = require('canvas');
 const fs = require("fs");
 client.commands = new Collection();
 client.slashCommands = new Collection();
 
 const config = require("./settings/config.json");
+client.emotes = client.config.emojis;
+global.player = new Player(client, client.config.opt.discordPlayer);
 client.login(config.token);
 
 /**************************** PARTIE HANDLER ****************************/
