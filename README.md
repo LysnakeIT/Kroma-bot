@@ -43,7 +43,3 @@ Ce projet utilise comme technologies :
 | **Twitch stats**	|
 | **Canvas welcome**	|
 | **Captcha** 	|
-
-## Screenshots
-
-SOON
