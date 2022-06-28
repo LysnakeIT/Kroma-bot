@@ -4,7 +4,7 @@ module.exports = async (client) => {
     console.log("Le bot est allumé");
 
     var status = [
-        `V4.0 Type !help`,
+        `V4.5 Type !help`,
         `Developed by Lysnake`
     ];
 

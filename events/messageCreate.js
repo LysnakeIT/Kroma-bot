@@ -1,10 +1,9 @@
-var config = require("../settings/config.json");
+var config = require('../config/bot');
 const { MessageEmbed } = require("discord.js");
 
 module.exports = async (client, message) => {
-    const prefix = config.prefix;
+    const prefix = config.discord.prefix;
 
-    if (message.author.bot) return;
     if (!message.guild) return;
     if (!message.content.startsWith(prefix)) return;
 
