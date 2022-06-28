@@ -16,7 +16,7 @@ module.exports = async (client, member) => {
         .setThumbnail(member.user.displayAvatarURL())
         .setFooter("Kroma'Discord")
         .setTimestamp()
-    let channel = client.channels.cache.get("792460321432010805");
+    let channel = client.channels.cache.get(process.env.channelLogs);
     if (!channel) return;
     channel.send({ embeds : [banembed] });
 }
