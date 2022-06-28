@@ -37,7 +37,7 @@ Ce projet utilise comme technologies :
 | **Météo**  	| :white_check_mark:	| :white_check_mark: 	| :x:	|
 | **Wikipedia**  	| :white_check_mark: 	| :white_check_mark: 	| :x:	|
 | **YouTube** 	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
-| **Mute / Unmute / Tempmute** 	| :white_check_mark: |  :white_check_mark:	| :white_check_mark:	|
+| **Mute / Unmute / Tempmute / Timeout** 	| :white_check_mark: |  :white_check_mark:	| :white_check_mark:	|
 | **Warns / delwarns / seewarns**	| :white_check_mark: 	| :x:	| :x:	|
 | **Slowmode**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
 | **Sondage**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
