@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 module.exports = {
     name: 'queue',
     aliases: [],
@@ -9,11 +9,11 @@ module.exports = {
     run: async (client, message, args) => {
         const queue = player.getQueue(message.guild.id);
 
-        if (!queue) return message.channel.send(`${client.emotes.error} - Aucune musique en cours de lecture !`);
+        if (!queue) return message.reply(`${client.emotes.error} - Aucune musique en cours de lecture !`);
 
-        if (!queue.tracks[0]) return message.channel.send(`${client.emotes.error} - Aucune musique dans la file d'attente après celle-ci !`);
+        if (!queue.tracks[0]) return message.reply(`${client.emotes.error} - Aucune musique dans la file d'attente après celle-ci !`);
 
-        const embed = new MessageEmbed();
+        const embed = new EmbedBuilder();
         const methods = ['', '🔁', '🔂'];
 
         embed.setColor("00FF04");
@@ -29,6 +29,6 @@ module.exports = {
 
         embed.setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
     },
 };

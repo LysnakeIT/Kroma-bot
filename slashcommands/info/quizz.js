@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
-const { MessageActionRow, MessageButton } = require('discord.js');
-const { questions } = require('../../settings/bot');
+const { ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { questions } = require('../../config/bot');
+const { ButtonStyle } = require('discord.js');
 
 module.exports = {
     name: "quizz",
@@ -8,7 +9,7 @@ module.exports = {
     permissions : [""],
 
     run: async (client, interaction, args) => {
-        const erreur = new Discord.MessageEmbed()
+        const erreur = new Discord.EmbedBuilder()()
             .setColor("#2F3136")
             .setTitle("<a:non:802645550435532810> Mauvais salon !")
         if (interaction.channel.name === (process.env.channelGames)) {
@@ -22,64 +23,64 @@ module.exports = {
             for (let j = 0; j < ret.length; j++) {
                 newret = `${newret}` + `${ret[j]}`
             }
-            const Embed = new Discord.MessageEmbed()
+            var Embed = new Discord.EmbedBuilder()()
                 .setTitle(q.title)
                 .setDescription(`${newret}`)
                 .setColor(`00FF04`)
                 .setThumbnail("https://img.static-rmg.be/a/view/q100/w900/h600/2447731/gettyimages-943481846-jpg.jpg")
                 .setFooter(`Répondez à ce message avec le bon numéro de question! Vous avez 15 secondes.`);
 
-            const row = new MessageActionRow()
+            const row = new ActionRowBuilder()
             if (q.options.length == 4) {
                 row.addComponents(
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('1')
                         .setLabel('1')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('2')
                         .setLabel('2')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('3')
                         .setLabel('3')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('4')
                         .setLabel('4')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
                 );
             } else if (q.options.length == 3) {
                 row.addComponents(
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('1')
                         .setLabel('1')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('2')
                         .setLabel('2')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('3')
                         .setLabel('3')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
                 );
             } else if (q.options.length == 2) {
                 row.addComponents(
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('1')
                         .setLabel('1')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
 
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setCustomId('2')
                         .setLabel('2')
-                        .setStyle('PRIMARY'),
+                        .setStyle(ButtonStyle.Primary),
                 );
             }
             const m = await interaction.followUp({ embeds: [Embed], ephemeral: true, components: [row] });
@@ -88,43 +89,45 @@ module.exports = {
                 let rep = true;
                 const collector = m.createMessageComponentCollector({ filter: iFiltre, time: 15000, max: 1, errors: ["time"], rep: true })
                 collector.on('collect', async i => {
+                    // En fonction de la réponse vérifie si c'est la bonne réponse et renvoie une image validant ou refusant notre réponse.
+                    Embed = new Discord.EmbedBuilder()
                     if (i.customId === '1') {
                         if (1 === q.correct) {
-                            Embed.setTitle("").setDescription('').setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`).setThumbnail("").setFooter(``);
+                            Embed.setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`);
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         } else {
-                            Embed.setTitle("").setColor(`00FF04`).setDescription('').setImage('https://www.bombyxstore.fr/img_per/1039442/mi_ima_04fdca7cd5.gif').setThumbnail("").setFooter(``);
+                            Embed.setColor(`00FF04`).setImage('https://static.vecteezy.com/system/resources/previews/001/200/274/non_2x/check-png.png')
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         }
                     } else if (i.customId === '2') {
                         if (2 === q.correct) {
-                            Embed.setTitle("").setDescription('').setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`).setThumbnail("").setFooter(``);
+                            Embed.setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`);
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         } else {
-                            Embed.setTitle("").setColor(`00FF04`).setDescription('').setImage('https://www.bombyxstore.fr/img_per/1039442/mi_ima_04fdca7cd5.gif').setThumbnail("").setFooter(``);
+                            Embed.setColor(`00FF04`).setImage('https://static.vecteezy.com/system/resources/previews/001/200/274/non_2x/check-png.png')
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         }
                     } else if (i.customId === '3') {
                         if (3 === q.correct) {
-                            Embed.setTitle("").setDescription('').setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`).setThumbnail("").setFooter(``);
+                            Embed.setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`);
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         } else {
-                            Embed.setTitle("").setColor(`00FF04`).setDescription('').setImage('https://www.bombyxstore.fr/img_per/1039442/mi_ima_04fdca7cd5.gif').setThumbnail("").setFooter(``);
+                            Embed.setColor(`00FF04`).setImage('https://static.vecteezy.com/system/resources/previews/001/200/274/non_2x/check-png.png')
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         }
                     } else if (i.customId === '4') {
                         if (4 === q.correct) {
-                            Embed.setTitle("").setDescription('').setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`).setThumbnail("").setFooter(``);
+                            Embed.setImage('https://c.tenor.com/Hw7f-4l0zgEAAAAM/check-green.gif').setColor(`00FF04`);
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         } else {
-                            Embed.setTitle("").setColor(`00FF04`).setDescription('').setImage('https://www.bombyxstore.fr/img_per/1039442/mi_ima_04fdca7cd5.gif').setThumbnail("").setFooter(``);
+                            Embed.setColor(`00FF04`).setImage('https://static.vecteezy.com/system/resources/previews/001/200/274/non_2x/check-png.png')
                             rep = false;
                             return m.edit({ embeds: [Embed], components: [] });
                         }

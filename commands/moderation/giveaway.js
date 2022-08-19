@@ -57,7 +57,7 @@ module.exports = {
                 const prize = message.content.split(' ').slice(3).join(' ');
                 if (prize === '') return message.channel.send('Vous devez entrer un prix');
                 if (stated_duration_hours3 !== '0') {
-                    const embed = new Discord.MessageEmbed()
+                    const embed = new Discord.EmbedBuilder()
                         .setTitle(`Nouveau Giveaway - ${prize}`)
                         .setThumbnail(logoprize)
                         .setColor('00FF04')
@@ -71,7 +71,7 @@ module.exports = {
                         setTimeout(() => {
                             let winner = msg.reactions.cache.get('🎉').users.cache.random();
                             if (msg.reactions.cache.get('🎉').users.cache.size < 1) {
-                                const winner_embed = new Discord.MessageEmbed()
+                                const winner_embed = new Discord.EmbedBuilder()
                                     .setTitle(`Résultat Giveaway - ${prize}`)
                                     .setColor('00FF04')
                                     .setThumbnail(logoprize)
@@ -81,7 +81,7 @@ module.exports = {
                                 msg.edit({ content: `:tada: **GIVEAWAY TERMINE** :tada:`, embeds : [winner_embed]});
                             }
                             if (!msg.reactions.cache.get('🎉').users.cache.size < 1) {
-                                const winner_embed = new Discord.MessageEmbed()
+                                const winner_embed = new Discord.EmbedBuilder()
                                     .setTitle(`Résultat Giveaway - ${prize}`)
                                     .setColor('00FF04')
                                     .setThumbnail(logoprize)

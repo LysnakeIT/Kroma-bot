@@ -8,10 +8,10 @@ module.exports = {
     run: async (client, message, args) => {
         const queue = player.getQueue(message.guild.id);
 
-        if (!queue || !queue.playing) return message.channel.send(`${client.emotes.error} - Aucune musique en cours de lecture !`);
+        if (!queue || !queue.playing) return message.reply(`${client.emotes.error} - Aucune musique en cours de lecture !`);
 
         const success = queue.skip();
 
-        return message.channel.send(`${client.emotes.success} - La musique actuelle vient d'être ** skipped **!`);
+        return message.reply(`${client.emotes.success} - La musique actuelle vient d'être ** skipped **!`);
     },
 };

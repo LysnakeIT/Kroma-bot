@@ -8,12 +8,12 @@ module.exports = {
     run: async (client, message, args) => {
         const queue = player.getQueue(message.guild.id);
 
-        if (!queue || !queue.playing) return message.channel.send(`${client.emotes.error} - Aucune musique en cours de lecture !`);
+        if (!queue || !queue.playing) return message.reply(`${client.emotes.error} - Aucune musique en cours de lecture !`);
 
-        if (!queue.tracks[0]) return message.channel.send(`${client.emotes.error} - Il n'y a qu'une seule musique dans la file d'attente.`);
+        if (!queue.tracks[0]) return message.reply(`${client.emotes.error} - Il n'y a qu'une seule musique dans la file d'attente.`);
 
         await queue.clear();
 
-        message.channel.send(`${client.emotes.success} - La file d'attente vient d'être ** supprimée **!`);
+        message.reply(`${client.emotes.success} - La file d'attente vient d'être ** supprimée **!`);
     },
 };

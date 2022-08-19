@@ -1,13 +1,15 @@
 const { Player } = require('discord-player');
-const { Client, Collection, MessageAttachment } = require("discord.js");
+const { Client, GatewayIntentBits, Partials, Collection, MessageAttachment } = require('discord.js');
 const client = new Client({
-    messageCacheLifetime: 60,
-    fetchAllMembers: false,
-    messageCacheMaxSize: 10,
-    restTimeOffset: 0,
-    restWsBridgetimeout: 100,
-    shards: "auto",
-    intents: 32767,
+	intents: [
+		GatewayIntentBits.Guilds, 
+		GatewayIntentBits.GuildMessages, 
+		GatewayIntentBits.GuildPresences, 
+		GatewayIntentBits.GuildMessageReactions, 
+		GatewayIntentBits.DirectMessages,
+		GatewayIntentBits.MessageContent
+	], 
+	partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction] 
 });
 
 const { Captcha } = require("discord.js-captcha");
@@ -27,10 +29,9 @@ const fs = require("fs");
 client.commands = new Collection();
 client.slashCommands = new Collection();
 
-const config = require("./settings/config.json");
-client.emotes = client.config.emojis;
-global.player = new Player(client, client.config.opt.discordPlayer);
-client.login(config.token);
+const config = require("./config/bot.js");
+client.emotes = config.emojis;
+client.login(config.discord.token);
 
 /**************************** PARTIE HANDLER ****************************/
 

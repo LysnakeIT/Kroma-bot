@@ -9,12 +9,14 @@ module.exports = async (client, member) => {
     const latestMemberBanAdd = fetchGuildAuditLogs.entries.first();
     const { executor } = latestMemberBanAdd;
 
-    const banembed = new Discord.MessageEmbed()
+    const banembed = new Discord.EmbedBuilder()
         .setAuthor(member.user.tag, member.user.displayAvatarURL())
         .setDescription(`:airplane_arriving: <@${member.user.id}> **a été déban du serveur par ${executor.tag}.**`)
         .setColor('#00FF04')
         .setThumbnail(member.user.displayAvatarURL())
-        .setFooter("Kroma'Discord")
+        .setFooter({
+            text: `Kroma'Discord`,
+        })
         .setTimestamp()
     let channel = client.channels.cache.get(process.env.channelLogs);
     if (!channel) return;

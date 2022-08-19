@@ -29,7 +29,7 @@ module.exports = {
         if (!interaction.guild.me.permissions.has("KICK_MEMBERS")) return interaction.followUp("**Je n'ai pas la permission de mute !**");
         mute.roles.remove(process.env.roleMembre)
         mute.roles.add(process.env.roleMembre).then(member => {
-            let mute_embed = new Discord.MessageEmbed()
+            let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.user.displayAvatarURL())
             .setTitle('Rapport de mute :')

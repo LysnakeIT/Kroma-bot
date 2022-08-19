@@ -10,15 +10,11 @@ module.exports = {
     run: async (Client, message, args) => {
         const time = args.slice(1).join(' ');
 
-        if (!time) return message.channel.send('Veuillez indiquer une durée valide.')
 
         const user = message.mentions.users.first();
         const milliseconds = ms(time);
 
-        if (!user) return message.channel.send('Veuillez mentionner le membre à mute.')
-        if (!milliseconds || milliseconds < 10000 || milliseconds > 2419200000) {
-            return message.channel.send('Veuillez indiquer une durée valide.');
-        }
+        if (!user) return message.reply('Veuillez mentionner le membre à mute.')
 
         const iosTime = new Date(Date.now() + milliseconds).toISOString();
 
@@ -31,7 +27,7 @@ module.exports = {
             },
         });
         const channel = message.guild.channels.cache.get("792460321432010805");
-        let mute_embed = new Discord.MessageEmbed()
+        let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(user.displayAvatarURL())
             .setTitle('Rapport de mute :')

@@ -48,7 +48,7 @@ module.exports = {
 
         await mute.timeout(milliseconds, reason)
         const channel = interaction.guild.channels.cache.get("792460321432010805");
-        let mute_embed = new Discord.MessageEmbed()
+        let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.displayAvatarURL())
             .setTitle('Rapport de mute :')

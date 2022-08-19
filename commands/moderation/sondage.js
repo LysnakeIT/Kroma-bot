@@ -14,12 +14,12 @@ module.exports = {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join("")
             if (thingToEcho == ("")) return
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle("📊 __**Sondage**__")
                 .addField(`${thingToEcho}`, "Répondre avec :white_check_mark: ou :x:")
                 .setColor("00FF04")
                 .setTimestamp()
-            channel.send(`@everyone`)
+            channel.send({ content: `@everyone`})
             channel.send({embeds : [embed]})
                 .then(function (message) {
                     message.react('802645523931856907')
@@ -27,7 +27,7 @@ module.exports = {
                 }).catch(function () {
                 });
         } else {
-            return message.reply("Tu n'as pas la permission")
+            return message.reply({ content:"Tu n'as pas la permission"})
         }
     }
 }

@@ -7,22 +7,27 @@ module.exports = {
     run: async (Client, message, args) => {
         let language = args[0];
         let text = args.slice(1).join(" ");
-        var erreur = new Discord.MessageEmbed()
+        var erreur = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle("<:warning:869206692091531305> !translate <langue de traduction (en, fr, etc)> <phrase à traduire>")
-        if (!language || language.length !== 2 || !text) return message.reply(erreur)
+        if (!language || language.length !== 2 || !text) return message.reply({ embeds : [erreur] })
 
         const result = await translate(text, { to: language });
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setDescription(`:earth_africa: Message envoyé par <@${message.author.id}> traduit dans <#${message.channel.id}>.`)
             .setTitle("Google Traduction")
-            .addField('Texte dans la langue de base', `\`\`\`${text}\`\`\``)
-            .addField(`Texte traduit en ${language}`, `\`\`\`${result.text}\`\`\``)
             .setTimestamp()
-            .setFooter(message.author.tag, message.author.displayAvatarURL())
-            .setColor("00FF04");
+            .setColor("00FF04")
+            .addFields([
+                { name : 'Texte dans la langue de base', value : `\`\`\`${text}\`\`\``},
+                { name : `Texte traduit en ${language}`, value : `\`\`\`${result.text}\`\`\``},
+            ])
+            .setFooter({
+                text: message.author.tag,
+                iconURL: message.author.displayAvatarURL(),
+            })
 
-        message.channel.send({ embeds : [embed] })
+        message.reply({ embeds : [embed] })
     }
 }

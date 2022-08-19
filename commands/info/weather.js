@@ -7,30 +7,31 @@ module.exports = {
     run: (Client, message, args) => {
 
         weather.find({ search: args.join(" "), degreeType: 'C' }, function (err, result) {
-
             if (!result || result.length === 0) {
-                var erreur = new Discord.MessageEmbed()
+                var erreur = new Discord.EmbedBuilder()
                     .setColor("#2F3136")
                     .setTitle("<a:non:802645550435532810> Emplacement introuvable !")
-                message.channel.send({ embeds : [erreur] })
+                message.reply({ embeds : [erreur] })
                 return;
             }
 
             var current = result[0].current;
             var location = result[0].location;
             if (err) message.channel.send(err);
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setDescription(`**${current.skytext}**`)
-                .setAuthor(`Météo pour ${current.observationpoint} :`)
+                .setAuthor({ name: `Météo pour ${current.observationpoint} :`})
                 .setThumbnail(current.imageUrl)
                 .setColor("00FF04")
-                .addField('**🕑 Fuseau horaire ❯**', `UTC${location.timezone}`, true)
-                .addField('**💥 Type de degré ❯**', "°" + location.degreetype, true)
-                .addField('**🌡️ Temperature ❯**', `${current.temperature} Degrés`, true)
-                .addField('**🤒 Ressenti ❯**', `${current.feelslike} Degrés`, true)
-                .addField('**💨 Vents ❯**', current.winddisplay, true)
-                .addField('**💦 Humidité ❯**', `${current.humidity}%`, true)
-            message.channel.send({ embeds : [embed] })
+                .addFields([
+                    { name : '**🕑 Fuseau horaire ❯**', value : `UTC${location.timezone}`, inline : true},
+                    { name : `**💥 Type de degré ❯**`, value : "°" + location.degreetype, inline : true},
+                    { name : `**🌡️ Temperature ❯**`, value : `${current.temperature} Degrés`, inline : true},
+                    { name : `**🤒 Ressenti ❯**`, value : `${current.feelslike} Degrés`, inline : true},
+                    { name : `**💨 Vents ❯**`, value : current.winddisplay, inline : true},
+                    { name : `**💦 Humidité ❯**`, value : `${current.humidity}%`, inline : true},
+                ])
+            message.reply({ embeds : [embed] })
         });
     }
 }

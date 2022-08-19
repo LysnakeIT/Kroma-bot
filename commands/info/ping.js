@@ -7,6 +7,6 @@ module.exports = {
 
     run: async (Client, message, args) => {
         let début = Date.now();
-        await message.channel.send(":ping_pong: | Ping").then(async (m) => await m.edit(`:ping_pong: | Pong : **${Date.now() - début} ms**`));
+        return await message.channel.send({ content: `:ping_pong: | Ping`}).then(async (m) => await m.edit({ content: `:ping_pong: | Pong : **${Date.now() - début} ms**`}));
     }
 }

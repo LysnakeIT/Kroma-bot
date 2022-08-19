@@ -1,12 +1,16 @@
 const Discord = require("discord.js");
 
 module.exports = async (Client, message) => {
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setDescription(`:wastebasket: **Message envoyé par** <@${message.author.id}> **supprimé dans** <#${message.channel.id}>.`)
-        .addField('Message supprimé', `\`\`\`${message.content}\`\`\``, true)
+        .addFields([
+            { name : 'Message supprimé', value : `\`\`\`${message.content}\`\`\``, inline : true},
+        ])
         .setColor('#00FF04')
-        .setFooter("Kroma'Discord")
+        .setFooter({
+            text: `Kroma'Discord`,
+        })
         .setTimestamp()
     let channel = message.guild.channels.cache.get(process.env.channelLogs);
     if (!channel) return;

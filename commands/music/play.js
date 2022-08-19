@@ -8,14 +8,14 @@ module.exports = {
     voiceChannel: true,
 
     run: async (client, message, args) => {
-        if (!args[0]) return message.channel.send(`${client.emotes.error} Veuillez saisir une recherche valide`);
+        if (!args[0]) return message.reply(`${client.emotes.error} Veuillez saisir une recherche valide`);
 
         const res = await player.search(args.join(' '), {
             requestedBy: message.member,
             searchEngine: QueryType.AUTO
         });
 
-        if (!res || !res.tracks.length) return message.channel.send(`${client.emotes.error} Aucun résultat trouvé`);
+        if (!res || !res.tracks.length) return message.reply(`${client.emotes.error} Aucun résultat trouvé`);
 
         const queue = await player.createQueue(message.guild, {
             metadata: message.channel
@@ -25,10 +25,10 @@ module.exports = {
             if (!queue.connection) await queue.connect(message.member.voice.channel);
         } catch {
             await player.deleteQueue(message.guild.id);
-            return message.channel.send(`${client.emotes.error} Je ne peux pas rejoindre le canal vocal`);
+            return message.reply(`${client.emotes.error} Je ne peux pas rejoindre le canal vocal`);
         }
 
-        await message.channel.send(`${client.emotes.music} Lancement de la musique`);
+        await message.reply(`${client.emotes.music} Lancement de la musique`);
 
         res.playlist ? queue.addTracks(res.tracks) : queue.addTrack(res.tracks[0]);
 

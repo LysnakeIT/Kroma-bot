@@ -1,5 +1,5 @@
 var config = require('../config/bot');
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, message) => {
     const prefix = config.discord.prefix;

@@ -7,18 +7,18 @@ module.exports = {
     description: "Mute temporairement un user",
     
     run: async (Client, message, args) => {
-        if (!message.member.permissions.has('KICK_MEMBERS')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
+        if (!message.member.permissions.has('KICK_MEMBERS')) return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.')
         const member = message.mentions.members.first()
-        if (!member) return message.channel.send('Veuillez mentionner le membre à mute.')
-        if (!member.manageable) return message.channel.send('Le bot ne peut pas mute ce membre.')
+        if (!member) return message.reply('Veuillez mentionner le membre à mute.')
+        if (!member.manageable) return message.reply('Le bot ne peut pas mute ce membre.')
         const duration = args[1]
-        if (!duration) return message.channel.send('Veuillez indiquer une durée valide.')
+        if (!duration) return message.reply('Veuillez indiquer une durée valide.')
         const reason = args.slice(2).join(' ') || 'Aucune raison fournie.'
         await member.roles.remove(process.env.roleMembre)
         await member.roles.add(process.env.roleMute)
         let user = message.mentions.users.first();
         const channel = message.guild.channels.cache.get(process.env.channelLogs);
-        let mute_embed = new Discord.MessageEmbed()
+        let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(user.displayAvatarURL())
             .setTitle('Rapport de mute :')

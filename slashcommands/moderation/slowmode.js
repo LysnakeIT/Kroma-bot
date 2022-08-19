@@ -22,13 +22,13 @@ module.exports = {
         if (isNaN(parseInt(args2))) return interaction.followUp('Ce n\'est pas un nombre')
 
         if (args2 != 1) {
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setTitle("Le slowmode a été activé sur ce channel")
                 .setColor("#2F3136")
             interaction.channel.setRateLimitPerUser(args2)
             interaction.followUp({ embeds: [embed] })
         } else {
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
                 .setTitle("Le slowmode a été désactivé sur ce channel")
                 .setColor("#2F3136")
             interaction.channel.setRateLimitPerUser(0)

@@ -20,7 +20,7 @@ module.exports = {
         const channel = interaction.guild.channels.cache.get(process.env.channelPoll);
         if (interaction.user.id == process.env.createurPoll) {
             let args2 = interaction.options.getString('message')
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setTitle("📊 __**Sondage**__")
                 .addField(`${args2}`, "Répondre avec :white_check_mark: ou :x:")
                 .setColor("00FF04")

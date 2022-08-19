@@ -13,16 +13,20 @@ module.exports = {
             user = message.author;
         }
         const member = message.guild.members.cache.get(user.id);
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor('#00FF04')
             .setThumbnail((member.user.displayAvatarURL({dynamic: true})))
             .setTitle(`📝 Information sur ${member.user.username}#${member.user.discriminator} ${member.nickname ? member.nickname : ''} :`)
-            .addField('📟 ID du compte :', `${member.user.id}`, true)
-            .addField('👍 A rejoint le serveur le :', `${moment(member.joinedAt).format('LL')}`, true)
-            .addField('✅ Status :', `${member.presence.status}`, true)
-            .addField('⚙️ Roles :', member.roles.cache.map(roles => `${roles.name}`).join(' - '), true)
-            .addField('🎮 Joue a :', `${member.presence.activities && member.presence.activities.length ? member.presence.activities[0].name : 'Rien'}`, true)
-            .setFooter(`En réponse à : ${message.author.tag}`)
-        message.channel.send({ embeds : [embed] })
+            .addFields([
+                { name : '📟 ID du compte :', value : `${member.user.id}`, inline : true},
+                { name : '👍 A rejoint le serveur le :', value : `${moment(member.joinedAt).format('LL')}`, inline : true},
+                { name : '✅ Status :', value : `${member.presence.status}`, inline : true},
+                { name : '⚙️ Roles :', value : member.roles.cache.map(roles => `${roles.name}`).join(' - '), inline : true},
+                { name : '🎮 Joue a :', value : `${member.presence.activities && member.presence.activities.length ? member.presence.activities[0].name : 'Rien'}`, inline : true},
+            ])
+            .setFooter({
+                text: `En réponse à : ${message.author.tag}`
+              })
+        message.reply({ embeds : [embed] })
     }
 }

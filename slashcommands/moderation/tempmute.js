@@ -47,7 +47,7 @@ module.exports = {
         await mute.roles.add(process.env.roleMute)
 
         const channel = interaction.guild.channels.cache.get(process.env.channelLogs);
-        let mute_embed = new Discord.MessageEmbed()
+        let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.user.displayAvatarURL())
             .setTitle('Rapport de mute :')

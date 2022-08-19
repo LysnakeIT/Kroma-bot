@@ -20,20 +20,25 @@ module.exports = {
             if (err) {
                 return console.log(err);
             }
-            let os_embed = new Discord.MessageEmbed()
+            let os_embed = new Discord.EmbedBuilder()
                 .setColor("#00FF04")
                 .setTitle(`Informations système du bot !`)
                 .setThumbnail(Client.user.displayAvatarURL())
-                .addField(":bullettrain_front: • RAM utilisée : ", `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, true)
-                .addField(":notepad_spiral: • Discord.js", `${version}`, true)
-                .addField(":flying_saucer: • Node :", `${process.version}`, true)
-                .addField(":flying_saucer: • Websocket ms :", `${ms(Client.ws.ping)}`, true)
-                .addField(":flying_saucer: • Uptime :", `${duration}`, true)
-                .addField(":fire: • Processeur :", `\`\`\`${os.cpus().map(i => `${i.model}`)[0]}\`\`\``)
-                .addField(":fire: • Utilisation CPU :", `\`${percent.toFixed(2)}%\``, true)
-                .addField(":gear: • Architecture :", `\`${os.arch()}\``, true)
-                .addField(":desktop: • OS :", `\`${os.platform()}\``, true)
-                .setFooter(`• Système de ${Client.user.username}`, Client.user.displayAvatarURL())
+                .addFields([
+                    { name : ':bullettrain_front: • RAM utilisée : ', value : `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, inline : true},
+                    { name : ':notepad_spiral: • Discord.js', value : `${version}`, inline : true},
+                    { name : ':flying_saucer: • Node :', value : `${process.version}`, inline : true},
+                    { name : ':flying_saucer: • Websocket ms :', value : `${ms(Client.ws.ping)}`, inline : true},
+                    { name : ':flying_saucer: • Uptime :', value : `${duration}`, inline : true},
+                    { name : ':fire: • Processeur :', value : `\`\`\`${os.cpus().map(i => `${i.model}`)[0]}\`\`\``},
+                    { name : ':fire: • Utilisation CPU :', value : `\`${percent.toFixed(2)}%\``, inline : true},
+                    { name : ':gear: • Architecture :', value : `\`${os.arch()}\``, inline : true},
+                    { name : ':desktop: • OS :', value : `\`${os.platform()}\``, inline : true},
+                ])
+                .setFooter({
+                    text: `• Système de ${Client.user.username}`,
+                    iconURL: Client.user.displayAvatarURL(),
+                  })
                 .setTimestamp()
             message.channel.send({ embeds: [os_embed] });
         })

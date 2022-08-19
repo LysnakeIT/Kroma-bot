@@ -9,11 +9,13 @@ module.exports = async (client, invite) => {
     const latestInviteCreate = fetchGuildAuditLogs.entries.first();
     const { executor } = latestInviteCreate;
 
-    const banembed = new Discord.MessageEmbed()
+    const banembed = new Discord.EmbedBuilder()
         .setAuthor(executor.tag, executor.displayAvatarURL())
         .setDescription(`:airplane_arriving: <@${executor.id}> **a crée une invitation ${invite.url}.**`)
         .setColor('#00FF04')
-        .setFooter("Kroma'Discord")
+        .setFooter({
+            text: `Kroma'Discord`,
+        })
         .setTimestamp()
     let channel = client.channels.cache.get(process.env.channelLogs);
     if (!channel) return;

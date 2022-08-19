@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = async(client, interaction) => {
 
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
         await interaction.deferReply({ ephemeral: false }).catch(() => { });
 
         const cmd = client.slashCommands.get(interaction.commandName);
@@ -22,14 +22,13 @@ module.exports = async(client, interaction) => {
 
         if (cmd) {
             if (!interaction.member.permissions.has(cmd.permissions || [])) {
-                return interaction.followUp({contents: 'Vous n\'avez pas la permission d\'utiliser cette commande'})
+                return interaction.followUp('Vous n\'avez pas la permission d\'utiliser cette commande')
             }
             cmd.run(client, interaction, args);
-
         }
     }
 
-    if (interaction.isContextMenu()) {
+    if (interaction.isContextMenuCommand()) {
         await interaction.deferReply({ ephemeral: false });
         const command = client.slashCommands.get(interaction.commandName);
         if (command) command.run(client, interaction);

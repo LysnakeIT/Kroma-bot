@@ -17,12 +17,12 @@ module.exports = {
     ],
 
     run: async (client, interaction, args) => {
-        var embedMention = new Discord.MessageEmbed()
+        var embedMention = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle("<:warning:869206692091531305> Veuillez mentionner le nombre de messages")
             
         let args2 = interaction.options.getInteger('nombre')
         interaction.channel.bulkDelete(args2);
-        return interaction.followUp(`${interaction.user.username} a supprimé ${args2} messages`);
+        return interaction.followUp({ content : `${interaction.user.username} a supprimé ${args2} messages`});
     },
 };
