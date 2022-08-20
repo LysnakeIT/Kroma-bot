@@ -26,25 +26,25 @@ Ce projet utilise comme technologies :
 - [Discord.js](https://discord.js.org/#/) - Module Node.js permettant l'interaction avec l'api Discord
 
 ## Fonctionnalités
-| Fonctionnalités        | Discord.js V12     | Discord.js V13 | Slash commandes |
-| - |:-:|:-:|:-:|
-| **User info / server info / bot info**  	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	|
-| **Calculatrice Math**  	| :white_check_mark:	| :white_check_mark: 	| :white_check_mark:	|
-| **Calcul pourcentage**  	| :white_check_mark: 	| :x: | :x: |
-| **Stats COVID19** 	| :white_check_mark: | :white_check_mark: | :x:	|
-| **Quizz informatique**  	| :white_check_mark: 	|  :white_check_mark: 	| :white_check_mark:	|
-| **Traduction langage** 	| :white_check_mark:	| :white_check_mark: 	| :x:	|
-| **Météo**  	| :white_check_mark:	| :white_check_mark: 	| :x:	|
-| **Wikipedia**  	| :white_check_mark: 	| :white_check_mark: 	| :x:	|
-| **YouTube** 	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
-| **Mute / Unmute / Tempmute / Timeout** 	| :white_check_mark: |  :white_check_mark:	| :white_check_mark:	|
-| **Warns / delwarns / seewarns**	| :white_check_mark: 	| :x:	| :x:	|
-| **Slowmode**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
-| **Sondage**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
-| **Musique** 	| :white_check_mark: 	| :white_check_mark: | :x: |
-| **Twitch stats**	| :white_check_mark:	| :white_check_mark: | Impossible |
-| **Canvas welcome**	| :white_check_mark:	| :white_check_mark:	| Impossible |
-| **Captcha** 	| :white_check_mark:| :white_check_mark: | Impossible |
+| Fonctionnalités        | Discord.js V12     | Discord.js V13 | Discord.js V14 | Slash commandes |
+| - |:-:|:-:|:-:|:-:|
+| **User info / server info / bot info**  	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	|
+| **Calculatrice Math**  	| :white_check_mark:	| :white_check_mark: 	| :x:	| :white_check_mark:	|
+| **Calcul pourcentage**  	| :white_check_mark: 	| :x: | :x:	| :x: |
+| **Stats COVID19** 	| :white_check_mark: | :white_check_mark: | :white_check_mark:	| :x:	|
+| **Quizz informatique**  	| :white_check_mark: 	|  :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	|
+| **Traduction langage** 	| :white_check_mark:	| :white_check_mark: 	| :white_check_mark:	| :x:	|
+| **Météo**  	| :white_check_mark:	| :white_check_mark: 	| :white_check_mark:	| :x:	|
+| **Wikipedia**  	| :white_check_mark: 	| :white_check_mark: 	| :white_check_mark:	| :x:	|
+| **YouTube** 	| :white_check_mark: 	| :white_check_mark:	| :x:	| :white_check_mark:	|
+| **Mute / Unmute / Tempmute / Timeout** 	| :white_check_mark: |  :white_check_mark:	| :x: | :white_check_mark:	|
+| **Warns / delwarns / seewarns**	| :white_check_mark: 	| :x:	| :x:	| :x:	|
+| **Slowmode**	| :white_check_mark: 	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	|
+| **Sondage**	| :white_check_mark: 	| :white_check_mark:	| :x:	| :white_check_mark:	|
+| **Musique** 	| :white_check_mark: 	| :white_check_mark: | :x:	| :x: |
+| **Twitch stats**	| :white_check_mark:	| :white_check_mark: | :white_check_mark:	| Impossible |
+| **Canvas welcome**	| :white_check_mark:	| :white_check_mark:	| :white_check_mark:	| Impossible |
+| **Captcha** 	| :white_check_mark:| :white_check_mark: | :x: | Impossible |
 
 ## Screenshots
 
