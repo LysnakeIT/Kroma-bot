@@ -47,16 +47,14 @@ module.exports = {
 
         await mute.timeout(milliseconds, reason)
         const channel = interaction.guild.channels.cache.get("792460321432010805");
-        console.log("cc");
+
         let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.displayAvatarURL())
             .setTitle('Rapport de mute :')
             .setDescription(`**Utilisateur mute :** ${mute.user.tag}\n**Modérateur :** ${interaction.user.tag}\n**Temps : ${duration}** \n**Raison :** ` + reason);
         channel.send({ embeds: [mute_embed] });
-        console.log("cc2");
         mute.send({ content: `Salut à toi <@${mute.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${duration}`})
-        console.log("cc3");
         interaction.followUp({ content: `${mute.user.tag} est mute`})
     }
 }

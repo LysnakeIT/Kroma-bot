@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageSelectMenu, MessageCollector } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder, MessageCollector } = require('discord.js');
 const Discord = require("discord.js");
 
 module.exports = {
@@ -8,9 +8,9 @@ module.exports = {
   
   run: async (client, message, args) => {
     if (message.channel.id === process.env.idHS) {
-      const row = new MessageActionRow()
+      const row = new ActionRowBuilder()
         .addComponents(
-          new MessageSelectMenu()
+          new SelectMenuBuilder()
             .setCustomId('select')
             .setMaxValues(1)
             .setMinValues(1)
@@ -108,7 +108,7 @@ module.exports = {
         } else if (menu.values[0] == "ddu") {
           return menu.channel.send("https://youtu.be/fu9-QfRmWjQ")
         } else if (menu.values[0] == "diag") {
-          let embedDiag = new Discord.MessageEmbed()
+          let embedDiag = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle('Diagnostic de PC')
             .setURL("https://userdiag.com")
@@ -117,7 +117,7 @@ module.exports = {
             .setThumbnail("https://cdn.discordapp.com/attachments/549725542895845380/868183645633015858/logo-10.png")
           return menu.channel.send({ embeds : [embedDiag] })
         } else if (menu.values[0] == "doc") {
-          let embedDoc = new Discord.MessageEmbed()
+          let embedDoc = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle('Boîtiers / Refroidissements / Ecrans')
             .setURL("https://docs.google.com/spreadsheets/d/e/2PACX-1vSA8AE88v4BP-43UjynJLTDAsNA9r50pZkHCsX2jT4x59AssLweT09s6DoIG9vEAgnE25mn3t3tWZ20/pubhtml")
@@ -125,7 +125,7 @@ module.exports = {
             .setDescription("Document regoupant des boîtiers de PC, des refroidissements (ventirad / watercooling), des écrans que nous conseillons pour leur qualité.")
           return menu.channel.send({ embeds : [embedDoc] })
         } else if (menu.values[0] == "formatage") {
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle('Comment installer/formater Windows 10 avec une clé USB')
             .addFields(
@@ -141,16 +141,16 @@ module.exports = {
 
           function sendImageValo() {
             let embeds = [];
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 1 - Changer la résolution et FPS')
               .setImage(img[0]))
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 2 - Graphismes')
               .setImage(img[1]))
             for (let i = 0; i < 2; i++) {
-              let embedNvidia = new Discord.MessageEmbed()
+              let embedNvidia = new Discord.EmbedBuilder()
               embedNvidia = embeds[i]
               menu.channel.send({ embeds : [embedNvidia] })
             }
@@ -168,28 +168,28 @@ module.exports = {
 
           function sendImage() {
             let embeds = [];
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 1 - Changer la résolution')
               .setImage(img[0]))
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 2 - Régler la taille et la position du bureau')
               .setImage(img[1]))
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 3 - Régler les paramètres d\'image avec Aperçu')
               .setImage(img[2]))
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 4 - Gérer les paramètres 3D Part.1')
               .setImage(img[3]))
-            embeds.push(new Discord.MessageEmbed()
+            embeds.push(new Discord.EmbedBuilder()
               .setColor("#2F3136")
               .setTitle('Etape 4 - Gérer les paramètres 3D Part.2')
               .setImage(img[4]))
             for (let i = 0; i < 5; i++) {
-              let embedNvidia = new Discord.MessageEmbed()
+              let embedNvidia = new Discord.EmbedBuilder()
               embedNvidia = embeds[i]
               menu.channel.send({ embeds : [embedNvidia] })
             }
@@ -197,7 +197,7 @@ module.exports = {
           }
           sendImage()
         } else if (menu.values[0] == "obs") {
-          let embedObs = new Discord.MessageEmbed()
+          let embedObs = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle('STREAM / RECORD AVEC OBS')
             .setImage("https://cdn.discordapp.com/attachments/865675399537885244/866240066379448340/unknown.png")
@@ -208,7 +208,7 @@ module.exports = {
             )
           menu.channel.send({ embeds : [embedObs] })
         } else if (menu.values[0] == "opti") {
-          let embedOpti = new Discord.MessageEmbed()
+          let embedOpti = new Discord.EmbedBuilder()
             .setColor("#2F3136")
             .setTitle('Optimisation saine de Windows')
             .addField('Guide & Vidéo', '[Accéder au guide](https://lysnakeit.github.io/Guide) **/** [Accéder au tutoriel](https://youtu.be/4EivQuzGXF4)')
