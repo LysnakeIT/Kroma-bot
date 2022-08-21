@@ -16,7 +16,9 @@ module.exports = {
             if (thingToEcho == ("")) return
             const embed = new Discord.EmbedBuilder()
                 .setTitle("📊 __**Sondage**__")
-                .addField(`${thingToEcho}`, "Répondre avec :white_check_mark: ou :x:")
+                .addFields([
+                    { name: `${thingToEcho}`, value: `Répondre avec :white_check_mark: ou :x:` }
+                ])
                 .setColor("00FF04")
                 .setTimestamp()
             channel.send({ content: `@everyone`})

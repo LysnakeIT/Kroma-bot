@@ -16,7 +16,7 @@ module.exports = {
 
         if (!user) return message.reply('Veuillez mentionner le membre à mute.')
 
-        const iosTime = new Date(Date.now() + milliseconds).toISOString();
+        const iosTime = new Date(Date.now() + 100000).toISOString();
 
         await fetch(`https://discord.com/api/guilds/${message.guild.id}/members/${user.id}`, {
             method: 'PATCH',
@@ -33,7 +33,7 @@ module.exports = {
             .setTitle('Rapport de mute :')
             .setDescription(`**Utilisateur mute :** ${user.tag}\n**Modérateur :** ${message.author.tag}\n**Temps : ${time}**`);
         channel.send({ embeds: [mute_embed] });
-        user.send(`Salut à toi <@${user.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${time}`)
+        user.send({ content :`Salut à toi <@${user.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${time}`})
         console.log(`${user.tag} est mute`)
     },
 };

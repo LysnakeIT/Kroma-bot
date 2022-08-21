@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const ms = require("ms");
-const fetch = require('node-fetch');
+
 module.exports = {
     name: "timeout",
     description: "Mute temporairement un user",
@@ -36,7 +36,6 @@ module.exports = {
         if (!mute) {
             return interaction.followUp("**Cet utilisateur n'est pas sur le serveur !**");
         }
-        if (!interaction.guild.me.permissions.has("KICK_MEMBERS")) return interaction.followUp("**Je n'ai pas la permission de mute !**");
 
         const duration = interaction.options.getString('temps');
         const reason = interaction.options.getString('raison');
@@ -48,13 +47,16 @@ module.exports = {
 
         await mute.timeout(milliseconds, reason)
         const channel = interaction.guild.channels.cache.get("792460321432010805");
+        console.log("cc");
         let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.displayAvatarURL())
             .setTitle('Rapport de mute :')
             .setDescription(`**Utilisateur mute :** ${mute.user.tag}\n**Modérateur :** ${interaction.user.tag}\n**Temps : ${duration}** \n**Raison :** ` + reason);
         channel.send({ embeds: [mute_embed] });
-        mute.send(`Salut à toi <@${mute.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${duration}`)
-        return interaction.followUp(`${mute.user.tag} est mute`)
+        console.log("cc2");
+        mute.send({ content: `Salut à toi <@${mute.id}> tu as été **mute** sur le serveur **Kroma'Discord** pendant ${duration}`})
+        console.log("cc3");
+        interaction.followUp({ content: `${mute.user.tag} est mute`})
     }
 }

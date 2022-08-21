@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { ButtonStyle } = require('discord.js');
 const math = require('mathjs');
 
 module.exports = {
@@ -22,9 +23,9 @@ module.exports = {
         }
 
         // Creation de l'embed avec la calculatrice
-        const emb = new Discord.MessageEmbed()
+        const emb = new Discord.EmbedBuilder()
             .setColor("#00FF04")
-            .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL())
+            .setAuthor({ name : interaction.user.tag, iconURL : interaction.user.displayAvatarURL()})
             .setDescription("```0```")
 
         interaction.followUp({
@@ -36,19 +37,19 @@ module.exports = {
             let time = 180000
             let value = ""
 
-            let emb1 = new Discord.MessageEmbed()
-                .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL())
+            let emb1 = new Discord.EmbedBuilder()
+                .setAuthor({ name : interaction.user.tag, iconURL : interaction.user.displayAvatarURL()})
                 .setColor("#00FF04")
 
             function createCollector(val, result = false) {
 
                 const filter = (button) => button.user.id === interaction.user.id && button.customId === 'cal' + val
-                let collect = msg.createMessageComponentCollector({ filter, componentType: 'BUTTON', time: time });
+                let collect = msg.createMessageComponentCollector({ filter, time: time });
 
                 collect.on("collect", async x => {
                     if (x.user.id !== interaction.user.id) return;
 
-                    x.deferUpdate();
+                    await x.deferUpdate();
 
                     if (result === "new") value = "0"
                     else if (isWrong) {
@@ -86,19 +87,19 @@ module.exports = {
         })
 
         function addRow(btns) {
-            let row1 = new MessageActionRow()
+            let row1 = new ActionRowBuilder()
             for (let btn of btns) {
                 row1.addComponents(btn)
             } return row1;
         }
 
-        function createButton(label, style = "SECONDARY") {
-            if (label === "Clear") style = "DANGER"
-            else if (label === ".") style = "SECONDARY"
-            else if (label === "=") style = "SUCCESS"
-            else if (isNaN(label)) style = "PRIMARY"
+        function createButton(label, style = ButtonStyle.Secondary) {
+            if (label === "Clear") style = ButtonStyle.Danger
+            else if (label === ".") style = ButtonStyle.Secondary
+            else if (label === "=") style = ButtonStyle.Success
+            else if (isNaN(label)) style = ButtonStyle.Primary
 
-            const btn = new MessageButton()
+            const btn = new ButtonBuilder()
                 .setLabel(label)
                 .setStyle(style)
                 .setCustomId("cal" + label)

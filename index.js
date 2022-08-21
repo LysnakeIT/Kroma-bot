@@ -12,6 +12,10 @@ const client = new Client({
 	partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction] 
 });
 
+const { DiscordTogether } = require('discord-together');
+
+client.discordTogether = new DiscordTogether(client);
+
 const { Captcha } = require("discord.js-captcha");
 const captch = new Captcha(Client, {
   guildID: process.env.guildID,

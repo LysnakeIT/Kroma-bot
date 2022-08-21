@@ -22,19 +22,20 @@ module.exports = {
             let args2 = interaction.options.getString('message')
             const embed = new Discord.EmbedBuilder()
                 .setTitle("📊 __**Sondage**__")
-                .addField(`${args2}`, "Répondre avec :white_check_mark: ou :x:")
+                .addFields([
+                    { name: `${args2}`, value: `Répondre avec :white_check_mark: ou :x:` }
+                ])
                 .setColor("00FF04")
                 .setTimestamp()
-                channel.send(`@everyone`)
+                channel.send({ content: `@everyone`})
                 channel.send({embeds : [embed]})
                 .then(function (message) {
                     message.react('802645523931856907')
                     message.react('802645550435532810')
                 }).catch(function () {
                 });
-                await interaction.deleteReply();
         } else {
-            return interaction.followUp("Tu n'as pas la permission")
+            return interaction.followUp({ content:"Tu n'as pas la permission"})
         }
     }
 }
