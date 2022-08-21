@@ -1,10 +1,13 @@
 const { Player } = require('discord-player');
-const { Client, GatewayIntentBits, Partials, Collection, MessageAttachment } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, Collection, AttachmentBuilder} = require('discord.js');
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds, 
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildBans,
 		GatewayIntentBits.GuildMessages, 
 		GatewayIntentBits.GuildPresences, 
+		GatewayIntentBits.GuildInvites,
 		GatewayIntentBits.GuildMessageReactions, 
 		GatewayIntentBits.DirectMessages,
 		GatewayIntentBits.MessageContent
@@ -107,9 +110,10 @@ async function welcome(member) {
   context.closePath();
   context.clip();
 
-  const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'png', size: 1024 }))
+  let avatarURL = member.user.displayAvatarURL({ format: "jpg", size: 1024 });
+  const avatar = await Canvas.loadImage(avatarURL.replace(".webp", ".png"));
   context.drawImage(avatar, 393, 47, 238, 238)
-  const attachment = new MessageAttachment(canvas.toBuffer(), './Welcome.jpg');
+  const attachment = new AttachmentBuilder(canvas.toBuffer(), { name :'./Welcome.jpg'});
   const embedsend = member.guild.channels.cache.get(process.env.channelWelcome)
   embedsend.send({ files: [attachment] })
 }
