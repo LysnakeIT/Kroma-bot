@@ -1,16 +1,17 @@
 const Discord = require("discord.js");
+const { AuditLogEvent } = require('discord.js');
 
 module.exports = async (client, invite) => {
     const fetchGuildAuditLogs = await invite.guild.fetchAuditLogs({
         limit: 1,
-        type: 'INVITE_CREATE'
+        type: AuditLogEvent.InviteCreate,
     });
 
     const latestInviteCreate = fetchGuildAuditLogs.entries.first();
     const { executor } = latestInviteCreate;
 
     const banembed = new Discord.EmbedBuilder()
-        .setAuthor(executor.tag, executor.displayAvatarURL())
+        .setAuthor({ name : executor.tag, iconURL: executor.displayAvatarURL()})
         .setDescription(`:airplane_arriving: <@${executor.id}> **a crée une invitation ${invite.url}.**`)
         .setColor('#00FF04')
         .setFooter({

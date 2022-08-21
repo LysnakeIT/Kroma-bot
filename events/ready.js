@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { ActivityType } = require('discord.js');
 
 module.exports = async (client) => {
     console.log("Le bot est allumé");
@@ -10,6 +10,6 @@ module.exports = async (client) => {
 
     setInterval(function () {
         var message = status[Math.floor(Math.random() * status.length)];
-        client.user.setPresence({ activities: [{ name: message, type: 'WATCHING' }], status: 'online'});
+        client.user.setPresence({ activities: [{ name: message, type: ActivityType.Watching }], status: 'online'});
     }, 2500)
 }
