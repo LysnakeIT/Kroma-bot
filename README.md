@@ -1,9 +1,9 @@
 # 🤖 Kroma-bot 🤖 [<img align="left" src="https://cdn.discordapp.com/avatars/500959710883872798/12d5da288ac949817abc8c5a49784079.png?size=256" width="262px"/>](https://code.visualstudio.com/)
 
 ### Voici une majeure partie du code du bot Kroma, des parties vont rester confidentiels
-&nbsp; Vous pouvez retrouver le projet sous la version v12 de Discord.js dans une des branches.  
-&nbsp; Le projet est adapté et fonctionnel uniquement pour le discord **Kroma' Discord**  
-&nbsp; Vous pouvez utiliser certaines parties pour votre bot (adapter en fonction du serveur discord)
+&nbsp;Vous pouvez retrouver le projet sous la version v12 et v13 de Discord.js dans une des branches.  
+&nbsp;Le projet est adapté et fonctionnel uniquement pour le discord **Kroma' Discord**  
+&nbsp;Vous pouvez utiliser certaines parties pour votre bot (adapter en fonction du serveur discord)
 
 ---
 
