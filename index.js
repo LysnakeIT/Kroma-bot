@@ -1,4 +1,3 @@
-const { Player } = require('discord-player');
 const { Client, GatewayIntentBits, Partials, Collection, AttachmentBuilder} = require('discord.js');
 const client = new Client({
 	intents: [
