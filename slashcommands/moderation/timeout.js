@@ -46,7 +46,7 @@ module.exports = {
         }
 
         await mute.timeout(milliseconds, reason)
-        const channel = interaction.guild.channels.cache.get("792460321432010805");
+        const channel = interaction.guild.channels.cache.get(process.env.channelLogs);
 
         let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
