@@ -26,7 +26,7 @@ module.exports = {
                 'Authorization': `Bot ${Client.token}`,
             },
         });
-        const channel = message.guild.channels.cache.get("792460321432010805");
+        const channel = message.guild.channels.cache.get(process.env.channelLogs);
         let mute_embed = new Discord.EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(user.displayAvatarURL())
