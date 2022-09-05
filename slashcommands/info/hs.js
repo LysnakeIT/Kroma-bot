@@ -90,10 +90,11 @@ module.exports = {
                             },
                         ]),
                 );
-            await message.channel.bulkDelete(1)
-            const m = await message.channel.send({ content: "Voici le menu regroupant les commandes hardware/software", components: [row] });
+            
+            const m = await interaction.followUp({ content: "Voici le menu regroupant les commandes hardware/software", components: [row] });
+            
+            const collector = m.createMessageComponentCollector({ filter: i => i.user.id == interaction.user.id, time: 60000 })
 
-            const collector = m.createMessageComponentCollector({ filter: i => i.user.id == message.author.id, time: 60000 })
 
             collector.on('collect', async menu => {
                 menu.channel.bulkDelete(1)
