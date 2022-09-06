@@ -6,7 +6,7 @@ module.exports = {
     description: "Unmute un user",
 
     run: async (Client, message, args) => {
-        if (!message.member.permissions.has("KICK_MEMBERS")) return message.reply("**Vous n'avez pas la permission d'éxécuter cette commande !**");
+        if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.')
 
         if (message.mentions.users.size === 0) {
             return message.reply("**Vous devez mentionner la personne à mute !**");
@@ -15,7 +15,7 @@ module.exports = {
         if (!mute) {
             return message.reply("**Cet utilisateur n'est pas sur le serveur !**");
         }
-        if (!message.guild.me.permissions.has("KICK_MEMBERS")) return message.reply("**Je n'ai pas la permission de mute !**");
+        if (!message.guild.me.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply("**Je n'ai pas la permission de mute !**");
         mute.roles.remove(process.env.roleMute)
         mute.roles.add(process.env.roleMembre).then(member => {
             message.reply(`**<@${mute.user.id}> a été unmute par ${message.author.username}**`)

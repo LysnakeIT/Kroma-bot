@@ -1,12 +1,9 @@
-const Discord = require("discord.js");
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
+
 module.exports = {
     name: "mute",
     description: "mute un membre",
-    permissions: [{
-        id: process.env.Modo,
-        type: 'ROLE',
-        permission: true,
-    }],
+    permissions: [PermissionsBitField.Flags.Administrator],
     options: [
         {
             name: "membre",
@@ -26,10 +23,10 @@ module.exports = {
         if (!mute) {
             return interaction.followUp("**Cet utilisateur n'est pas sur le serveur !**");
         }
-        if (!interaction.guild.me.permissions.has("KICK_MEMBERS")) return interaction.followUp("**Je n'ai pas la permission de mute !**");
+        if (!interaction.guild.me.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.followUp("**Je n'ai pas la permission de mute !**");
         mute.roles.remove(process.env.roleMembre)
         mute.roles.add(process.env.roleMembre).then(member => {
-            let mute_embed = new Discord.EmbedBuilder()
+            let mute_embed = new EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.user.displayAvatarURL())
             .setTitle('Rapport de mute :')

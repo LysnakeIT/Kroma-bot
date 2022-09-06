@@ -1,10 +1,10 @@
-const Discord = require("discord.js");
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 const ms = require("ms");
 
 module.exports = {
     name: "timeout",
     description: "Mute temporairement un user",
-    permissions: "ADMINISTRATOR",
+    permissions: [PermissionsBitField.Flags.Administrator],
     options: [
         {
             name: "membre",
@@ -48,7 +48,7 @@ module.exports = {
         await mute.timeout(milliseconds, reason)
         const channel = interaction.guild.channels.cache.get(process.env.channelLogs);
 
-        let mute_embed = new Discord.EmbedBuilder()
+        let mute_embed = new EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(mute.displayAvatarURL())
             .setTitle('Rapport de mute :')

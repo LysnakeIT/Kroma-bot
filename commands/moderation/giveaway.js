@@ -1,4 +1,5 @@
-const Discord = require("discord.js");
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
+
 module.exports = {
     name: "giveaway",
     category: "info",
@@ -9,7 +10,7 @@ module.exports = {
             var time = '';
             var time2 = '';
             var time3 = '';
-            if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('**Vous n\'avez pas la permission d\'éxécuter cette commande !**');
+            if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.channel.send('**Vous n\'avez pas la permission d\'éxécuter cette commande !**');
             const stated_duration_hours = message.content.split(' ')[1];
             const stated_duration_hours2 = stated_duration_hours
             if (stated_duration_hours2.includes('s')) {
@@ -57,7 +58,7 @@ module.exports = {
                 const prize = message.content.split(' ').slice(3).join(' ');
                 if (prize === '') return message.channel.send('Vous devez entrer un prix');
                 if (stated_duration_hours3 !== '0') {
-                    const embed = new Discord.EmbedBuilder()
+                    const embed = new EmbedBuilder()
                         .setTitle(`Nouveau Giveaway - ${prize}`)
                         .setThumbnail(logoprize)
                         .setColor('00FF04')
@@ -71,7 +72,7 @@ module.exports = {
                         setTimeout(() => {
                             let winner = msg.reactions.cache.get('🎉').users.cache.random();
                             if (msg.reactions.cache.get('🎉').users.cache.size < 1) {
-                                const winner_embed = new Discord.EmbedBuilder()
+                                const winner_embed = new EmbedBuilder()
                                     .setTitle(`Résultat Giveaway - ${prize}`)
                                     .setColor('00FF04')
                                     .setThumbnail(logoprize)
@@ -81,7 +82,7 @@ module.exports = {
                                 msg.edit({ content: `:tada: **GIVEAWAY TERMINE** :tada:`, embeds : [winner_embed]});
                             }
                             if (!msg.reactions.cache.get('🎉').users.cache.size < 1) {
-                                const winner_embed = new Discord.EmbedBuilder()
+                                const winner_embed = new EmbedBuilder()
                                     .setTitle(`Résultat Giveaway - ${prize}`)
                                     .setColor('00FF04')
                                     .setThumbnail(logoprize)

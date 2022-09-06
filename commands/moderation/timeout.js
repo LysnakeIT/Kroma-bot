@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { PermissionsBitField, EmbedBuilder} = require('discord.js');
 const fetch = require('node-fetch');
 const ms = require('ms');
 
@@ -8,6 +8,7 @@ module.exports = {
     description: "Mute temporairement un user",
 
     run: async (Client, message, args) => {
+        if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply('Vous n\'avez pas la permission d\'utiliser cette commande.')
         const time = args.slice(1).join(' ');
 
 
@@ -27,7 +28,7 @@ module.exports = {
             },
         });
         const channel = message.guild.channels.cache.get(process.env.channelLogs);
-        let mute_embed = new Discord.EmbedBuilder()
+        let mute_embed = new EmbedBuilder()
             .setColor("00FF04")
             .setThumbnail(user.displayAvatarURL())
             .setTitle('Rapport de mute :')
