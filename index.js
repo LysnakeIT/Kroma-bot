@@ -30,7 +30,8 @@ const captch = new Captcha(Client, {
   showAttemptCount: true
 });
 
-const Canvas = require('canvas');
+const { registerFont } = require('canvas');
+registerFont("./fonts/Gotham-Black.ttf", { family: 'Gotham Black' })
 const fs = require("fs");
 client.commands = new Collection();
 client.slashCommands = new Collection();
