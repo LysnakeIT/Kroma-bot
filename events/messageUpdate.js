@@ -4,6 +4,7 @@ module.exports = async (Client, oldMessage, newMessage) => {
     if (oldMessage.content === newMessage.content) {
         return
     }
+    if (oldMessage.author == null) return;
     let embed = new Discord.EmbedBuilder()
         .setAuthor({ name : oldMessage.author.tag, iconURL: oldMessage.author.displayAvatarURL()})
         .setDescription(`:pencil2: **Message envoyé par** <@${oldMessage.author.id}> **modifié dans** <#${oldMessage.channel.id}>.`)
